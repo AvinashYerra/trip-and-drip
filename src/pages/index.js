@@ -58,6 +58,23 @@ export default function Home() {
         </section>
       </div>
 
+    <section className="how-to-use-section" id="how-to-use">
+      <h2>How Trip & Drip Works</h2>
+      <div className="steps">
+        <div className="step">
+          <h3>1. Choose Your Interests</h3>
+          <p>Select any two favorites — like your top movies, artists, books, albums, or more.</p>
+        </div>
+        <div className="step">
+          <h3>2. Discover Your Destination</h3>
+          <p>We suggest unique travel destinations that align with your vibe and preferences.</p>
+        </div>
+        <div className="step">
+          <h3>3. Find Your Fashion</h3>
+          <p>Get curated brand and fashion suggestions to stay stylish wherever you go.</p>
+        </div>
+      </div>
+      </section>
       {/* Styled JSX */}
       <style jsx>{`
         .section {
@@ -264,6 +281,50 @@ export default function Home() {
 
         .hero-content button:hover {
           background-color: #ddd;
+        }
+
+
+
+        .how-to-use-section {
+          padding: 5rem 2rem;
+          background-color: #383738;
+          text-align: center;
+        }
+
+        .how-to-use-section h2 {
+          font-size: 2.5rem;
+          margin-bottom: 3rem;
+          color: white;
+        }
+
+        .steps {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          gap: 2rem;
+          align-items: stretch;
+        }
+
+        .step {
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          justify-content: space-between;
+          flex: 1;
+          text-align: left;
+        }
+
+        .step h3 {
+          font-size: 1.5rem;
+          color: #333;
+          margin-bottom: 0.75rem;
+        }
+
+        .step p {
+          font-size: 1rem;
+          color: #555;
         }
 
       `}</style>

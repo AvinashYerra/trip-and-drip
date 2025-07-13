@@ -1,7 +1,8 @@
 const Footer = () => (
   <footer className="footer">
-    <p>© {new Date().getFullYear()} Trip & Drip. Built with taste.</p>
-    <div>Powered by Qloo’s Taste AI™</div>
+    <p>© {new Date().getFullYear()} Trip & Drip. </p>
+    <p>Built with taste.</p>
+    <div>Powered by Qloo & Gemini</div>
     <style jsx>{`
       .footer {
         background: #fafafa;
