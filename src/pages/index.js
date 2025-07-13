@@ -1,220 +1,272 @@
 import { useRouter } from "next/router";
+import Header from "../components/Header";
 
 export default function Home() {
-  const router = useRouter();
-
-  const handleNavigate = (path) => {
-    router.push(path);
-  };
-
   return (
-    <div className="container">
-      {/* Section 1: Hero Landing Page */}
-      <section className="section hero" data-aos="fade-up">
-        <h1 className="headline">Explore the World in Style</h1>
-        <p className="subtext">
-          Trip & Drip helps you discover destinations and the perfect outfits to match your vibe.
-        </p>
-        <div className="button-group">
-          <div className="btn primary" onClick={() => handleNavigate("/destination")}>
-            Plan a Trip
+    <>
+      <div>
+        {/* Hero Section */}
+        <section className="hero-section">
+          <div className="hero-background"></div>
+
+          {/* ✅ Header stays at top */}
+          <div className="hero-header-wrapper">
+            <Header />
           </div>
-          <div className="btn outline" onClick={() => handleNavigate("/fashion")}>
-            Style Me
+
+          {/* ✅ Centered content */}
+          <div className="hero-content">
+            <h1>Explore Smarter. </h1>
+             <h1>Dress Smarter.</h1> 
+            <p>Plan your trips with AI and get personalized fashion suggestions.</p>
+            <button>How to Use</button>
           </div>
+        </section>
+
+        {/* Trip Planner Section */}
+        <section id="trip-planner" className="section trip-planner">
+        <div className="background-grid">
+          <div className="grid-image"><img src="/images/trip1.jpg" alt="Trip 1" /></div>
+          <div className="grid-image"><img src="/images/trip2.jpg" alt="Trip 2" /></div>
+          <div className="grid-image"><img src="/images/trip3.jpg" alt="Trip 3" /></div>
+          <div className="grid-image"><img src="/images/trip4.jpg" alt="Trip 4" /></div>
         </div>
-      </section>
 
-      {/* Section 2: Destination Planner */}
-      <section className="section planner" data-aos="fade-up">
-        <h2 className="section-title">🎒 Personalized Destination Planner</h2>
-        <p className="section-desc">
-          Discover different travel destinations based on your favourite movie, artist and many more..
-          Choose 
-        </p>
-      </section>
+        {/* Foreground Text */}
+        <div className="text-overlay">
+          <h2>Know Your Next Destination</h2>
+          <p>
+            Get suggestions for your next destination based on your interests.
+          </p>
+          <button>Get Started</button>
+        </div>
+        </section>
 
-      {/* Section 3: Fashion Assistant */}
-      <section className="section fashion" data-aos="fade-up">
-        <h2 className="section-title">🧥 Your Fashion Travel Assistant</h2>
-        <p className="section-desc">
-          We curate looks that match your travel mood and cultural context — so you always look on point.
-        </p>
-      </section>
+        {/* Fashion Assistant Section */}
+        <section id="fashion-assistant" className="fashion-assistant">
+        {/* Background Image */}
+        <div className="background-image"></div>
 
-    <section className="section contact" data-aos="fade-up">
-      <h2 className="section-title">📬 Contact Us</h2>
-      <p className="section-desc">
-        Have questions or feedback? We'd love to hear from you.
-      </p>
+        {/* Text Content Overlay */}
+        <div className="fashion-text">
+          <h2>Get Ready in Style</h2>
+          <p>
+            Get suggestions for your next Outfit based on your interests.
+          </p>
+          <button>Get Started</button>
+        </div>
+        </section>
+      </div>
 
-      <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" rows="5" required />
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
-
-
-
-
+      {/* Styled JSX */}
       <style jsx>{`
-        .container {
-          width: 100%;
-        }
-
         .section {
-          min-height: calc(100vh - 72px - 90px); /* Adjust for header/footer */
+          height: 100vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding: 60px 20px;
+          padding: 2rem;
           text-align: center;
         }
 
         .hero {
-          background: #d7ebf6;
+          background: #f5f5f5;
         }
 
-        .planner {
-          background: #ffffff;
+        h1, h2 {
+          margin-bottom: 1rem;
         }
 
-        .fashion {
-          background: #f5f0fa;
-        }
-
-        .headline {
-          font-size: 3.2rem;
-          color: #6c6fcd;
-          margin-bottom: 20px;
-          font-weight: 700;
-        }
-
-        .subtext {
+        p {
+          max-width: 600px;
           font-size: 1.2rem;
-          max-width: 700px;
-          color: #444;
-          margin-bottom: 30px;
-        }
-
-        .button-group {
-          display: flex;
-          gap: 16px;
-          flex-wrap: wrap;
-        }
-
-        .btn {
-          cursor: pointer;
-          padding: 12px 28px;
-          border-radius: 30px;
-          font-weight: 600;
-          font-size: 1rem;
-          transition: 0.3s ease;
-        }
-
-        .btn.primary {
-          background: #6c6fcd;
-          color: white;
-        }
-
-        .btn.primary:hover {
-          background: #5557a5;
-        }
-
-        .btn.outline {
-          background: transparent;
-          border: 2px solid #6c6fcd;
-          color: #6c6fcd;
-        }
-
-        .btn.outline:hover {
-          background: #6c6fcd;
-          color: white;
-        }
-
-        .section-title {
-          font-size: 2.5rem;
-          color: #6c6fcd;
-          margin-bottom: 20px;
-          font-weight: 600;
-        }
-
-        .section-desc {
-          font-size: 1.15rem;
-          color: #555;
-          max-width: 700px;
           line-height: 1.6;
         }
-
-        @media (max-width: 768px) {
-          .headline {
-            font-size: 2.2rem;
-          }
-
-          .section-title {
-            font-size: 1.8rem;
-          }
-
-          .subtext,
-          .section-desc {
-            font-size: 1rem;
-          }
-
-          .btn {
-            width: 100%;
-            text-align: center;
-          }
-
-          .contact {
-            background: #eef3f9;
-          }
-
-          .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            width: 100%;
-            max-width: 600px;
-            margin-top: 30px;
-          }
-
-          .contact-form input,
-          .contact-form textarea {
-            padding: 12px 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            resize: vertical;
-          }
-
-          .contact-form textarea {
-            resize: vertical;
-          }
-
-          .contact-form button {
-            padding: 12px;
-            background: #6c6fcd;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-          }
-
-          .contact-form button:hover {
-            background: #5557a5;
-          }
-
-
-
-
+        .trip-planner {
+          position: relative;
+          height: 100vh;
+          width: 100%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: white;
         }
+
+        .background-grid {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          z-index: 0;
+        }
+
+        .grid-image {
+          width: 50%;
+          height: 50%;
+          overflow: hidden;
+        }
+
+        .grid-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: brightness(65%);
+        }
+
+        .text-overlay {
+          position: relative;
+          z-index: 1;
+          max-width: 700px;
+          padding: 2rem;
+          border-radius: 12px;
+        }
+
+        .text-overlay h2 {
+          font-size: 2.8rem;
+          margin-bottom: 1rem;
+        }
+
+        .text-overlay p {
+          font-size: 1.2rem;
+          line-height: 1.6;
+        }
+      .text-overlay button {
+        margin-top:10px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem;
+        color: white;
+        border-radius: 6px;
+        border-color:white;
+        background : transparent;
+        cursor: pointer;
+      }
+
+        .fashion-assistant {
+          position: relative;
+          height: 100vh;
+          width: 100%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+        }
+
+        .background-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('/images/fashion.jpg');
+          background-size: cover;
+          background-position: center;
+          filter: grayscale(100%) brightness(100%);
+          z-index: 0;
+        }
+
+        .fashion-text {
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
+          padding: 3rem;
+          color: white;
+          margin-left: 5%;
+        }
+
+        .fashion-text h2 {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .fashion-text p {
+          font-size: 1.2rem;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+
+        .fashion-text button {
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+          background-color: #fff;
+          color: #000;
+          border-color: black ;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .fashion-text button:hover {
+          background-color: #ddd;
+        }
+        .hero-section {
+          position: relative;
+          height: 100vh;
+          width: 100%;
+          overflow: hidden;
+          color: white;
+        }
+
+        .hero-background {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('/images/hero.jpg');
+          background-size: cover;
+          background-position: center;
+          filter: brightness(60%);
+          z-index: 0;
+        }
+
+        .hero-header-wrapper {
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero-content {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+          text-align: center;
+          padding: 2rem;
+          max-width: 800px;
+        }
+
+        .hero-content h1 {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+          font-size: 1.3rem;
+          margin-bottom: 2rem;
+        }
+
+        .hero-content button {
+          padding: 0.8rem 1.6rem;
+          font-size: 1rem;
+          background-color: #fff;
+          color: #000;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .hero-content button:hover {
+          background-color: #ddd;
+        }
+
       `}</style>
-    </div>
+    </>
   );
 }
