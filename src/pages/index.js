@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -75,6 +76,9 @@ export default function Home() {
         </div>
       </div>
       </section>
+
+    <Footer />
+
       {/* Styled JSX */}
       <style jsx>{`
         .section {
@@ -146,12 +150,12 @@ export default function Home() {
 
         .text-overlay h2 {
           font-size: 2.8rem;
-          margin-bottom: 1rem;
         }
 
         .text-overlay p {
           font-size: 1.2rem;
           line-height: 1.6;
+          margin-top: 2rem;
         }
       .text-overlay button {
         margin-top:10px;
