@@ -6,6 +6,28 @@ export default function Destination() {
   const [selectedEntity2, setSelectedEntity2] = useState("");
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+
+  async function fetchDestination() {
+    setLoading(true);
+    setResult(null);
+
+    const res = await fetch("/api/destination", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        pref1Type: selectedEntity1,
+        pref1Value: input1,
+        pref2Type: selectedEntity2,
+        pref2Value: input2,
+      }),
+    });
+
+    const data = await res.json();
+    setResult(data);
+    setLoading(false);
+  }
 
   return (
     <>
@@ -27,8 +49,8 @@ export default function Destination() {
               >
                 <option value="">-- Choose Entity --</option>
                 {QLOO_ENTITIES.map((ent) => (
-                  <option key={ent} value={ent}>
-                    {ent}
+                  <option key={ent.value} value={ent.value}>
+                    {ent.label}
                   </option>
                 ))}
               </select>
@@ -53,8 +75,8 @@ export default function Destination() {
               >
                 <option value="">-- Choose Entity --</option>
                 {QLOO_ENTITIES.map((ent) => (
-                  <option key={ent} value={ent}>
-                    {ent}
+                  <option key={ent.value} value={ent.value}>
+                    {ent.label}
                   </option>
                 ))}
               </select>
@@ -71,6 +93,21 @@ export default function Destination() {
             </div>
           </div>
         </section>
+        <button
+          onClick={fetchDestination}
+          disabled={loading}
+          className="fetch-btn"
+        >
+          {loading ? "Loading..." : "Find Destination"}
+        </button>
+
+        {result?.destinationName && (
+          <div className="result-box">
+            <h3>🌍 Suggested: {result.destinationName}</h3>
+            <p>Country: {result.destinationInfo?.country}</p>
+            <p>Tags: {result.destinationInfo?.tags?.join(", ")}</p>
+          </div>
+        )}
       </main>
 
       <style jsx>{`
@@ -137,6 +174,32 @@ export default function Destination() {
           border-radius: 8px;
           border: none;
           outline: none;
+        }
+
+        .fetch-btn {
+          margin-top: 30px;
+          padding: 12px 24px;
+          font-size: 1rem;
+          font-weight: 600;
+          border: none;
+          border-radius: 8px;
+          background: linear-gradient(135deg, #6c6fcd, #9e9cf0);
+          color: white;
+          cursor: pointer;
+          transition: all 0.3s ease-in-out;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .fetch-btn:hover {
+          background: linear-gradient(135deg, #5a5ecb, #8c89e0);
+          transform: translateY(-2px);
+        }
+
+        .fetch-btn:disabled {
+          background: #ccc;
+          cursor: not-allowed;
+          transform: none;
+          box-shadow: none;
         }
 
         .fade-in {
