@@ -101,13 +101,33 @@ export default function Destination() {
           {loading ? "Loading..." : "Find Destination"}
         </button>
 
-        {result?.destinationName && (
+        {/* {result?.destinationName && (
           <div className="result-box">
             <h3>🌍 Suggested: {result.destinationName}</h3>
             <p>Country: {result.destinationInfo?.country}</p>
             <p>Tags: {result.destinationInfo?.tags?.join(", ")}</p>
           </div>
-        )}
+        )} */}
+
+
+        {result?.destinations && (
+        <div className="result-grid">
+          {result.destinations.map((dest, idx) => (
+            <div className="result-box" key={idx}>
+              <h3>🌍 Suggested: {dest.name}</h3>
+              {dest.info ? (
+                <>
+                  <p>Country: {dest.info.country || "Unknown"}</p>
+                  <p>Tags: {dest.info.tags?.join(", ") || "No tags available"}</p>
+                  {dest.info.description && <p>{dest.info.description}</p>}
+                </>
+              ) : (
+                <p>❌ Info not available</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
       </main>
 
       <style jsx>{`
@@ -205,7 +225,18 @@ export default function Destination() {
         .fade-in {
           animation: fadeIn 0.4s ease-in-out forwards;
         }
-
+        .result-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+          margin-top: 2rem;
+        }
+        .result-box {
+          padding: 1rem;
+          background: #f3f3f3;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
         @keyframes fadeIn {
           from {
             opacity: 0;

@@ -107,13 +107,18 @@ export default function Fashion() {
             {loading ? "Styling..." : "Find Fashion Style"}
           </button>
 
-          {result?.fashionStyle && (
-            <div className="result-box">
-              <h3>👗 Suggested Style: {result.fashionStyle}</h3>
-              <p>Inspiration: {result.inspiration}</p>
-              <p>Tags: {result.tags?.join(", ")}</p>
-            </div>
-          )}
+          {result?.styles && result.styles.length > 0 && (
+          <div className="result-grid">
+            {result.styles.map((style, index) => (
+              <div className="result-box" key={index}>
+                <h3>👗 Suggested Style: {style.fashionStyle}</h3>
+                <p><strong>Inspiration:</strong> {style.inspiration}</p>
+                <p><strong>Brand:</strong> {style.brand}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
         </div>
       </main>
 
@@ -229,6 +234,20 @@ export default function Fashion() {
         .fade-in {
           animation: fadeIn 0.4s ease-in-out forwards;
         }
+        .result-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .result-box {
+        padding: 1rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
 
         @keyframes fadeIn {
           from {
