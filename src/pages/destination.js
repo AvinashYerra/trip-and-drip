@@ -35,19 +35,19 @@ export default function Destination() {
         <section className="intro" data-aos="fade-down">
           <h1 className="headline">Destination Planner</h1>
           <p className="subtext">
-            Get personalized travel vibes based on your preferences.
+            Get personalized travel destinations based on your Taste.
           </p>
-        </section>
-        <section className="intro" data-aos="fade-up">
+        {/* </section>
+        <section className="intro" data-aos="fade-up"> */}
           <div className="selectors">
             {/* Entity 1 */}
             <div className="dropdown-group">
-              <label>Select First Preference</label>
+              <label>Select First Category</label>
               <select
                 value={selectedEntity1}
                 onChange={(e) => setSelectedEntity1(e.target.value)}
               >
-                <option value="">-- Choose Entity --</option>
+                <option value="">Choose One</option>
                 {QLOO_ENTITIES.map((ent) => (
                   <option key={ent.value} value={ent.value}>
                     {ent.label}
@@ -58,7 +58,7 @@ export default function Destination() {
               {selectedEntity1 && (
                 <input
                   type="text"
-                  placeholder={`Enter ${selectedEntity1}...`}
+                  placeholder={`Enter any ${selectedEntity1} you like`}
                   value={input1}
                   onChange={(e) => setInput1(e.target.value)}
                   className="fade-in"
@@ -68,12 +68,12 @@ export default function Destination() {
 
             {/* Entity 2 */}
             <div className="dropdown-group">
-              <label>Select Second Preference</label>
+              <label>Select Second Category</label>
               <select
                 value={selectedEntity2}
                 onChange={(e) => setSelectedEntity2(e.target.value)}
               >
-                <option value="">-- Choose Entity --</option>
+                <option value="">Choose one</option>
                 {QLOO_ENTITIES.map((ent) => (
                   <option key={ent.value} value={ent.value}>
                     {ent.label}
@@ -84,7 +84,7 @@ export default function Destination() {
               {selectedEntity2 && (
                 <input
                   type="text"
-                  placeholder={`Enter ${selectedEntity2}...`}
+                  placeholder={`Enter any ${selectedEntity2} you like`}
                   value={input2}
                   onChange={(e) => setInput2(e.target.value)}
                   className="fade-in"
@@ -92,27 +92,51 @@ export default function Destination() {
               )}
             </div>
           </div>
-        </section>
-        <button
-          onClick={fetchDestination}
-          disabled={loading}
-          className="fetch-btn"
-        >
-          {loading ? "Loading..." : "Find Destination"}
-        </button>
 
-        {result?.destinationName && (
-          <div className="result-box">
-            <h3>🌍 Suggested: {result.destinationName}</h3>
-            <p>Country: {result.destinationInfo?.country}</p>
-            <p>Tags: {result.destinationInfo?.tags?.join(", ")}</p>
-          </div>
-        )}
+          <button
+            onClick={fetchDestination}
+            disabled={loading}
+            className="fetch-btn"
+          >
+            {loading ? "Loading..." : "Find Destination"}
+          </button>
+        </section>
+
+        {result?.destinations && (
+        <div className="result-grid">
+          {result.destinations.map((dest, idx) => (
+            <div className="result-box" key={idx}>
+              <h3>🌍 Suggested: {dest.name}</h3>
+              {dest.info ? (
+                <>
+                  <p>Country: {dest.info.country || "Unknown"}</p>
+                  <p>Tags: {dest.info.tags?.join(", ") || "No tags available"}</p>
+                  {dest.info.description && <p>{dest.info.description}</p>}
+                </>
+              ) : (
+                <p>❌ Info not available</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
       </main>
 
       <style jsx>{`
+
+      .intro {
+          background-image: url('/images/destination.jpg'); /* replace with your image path */
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          padding: 60px 20px;
+          border-radius: 12px;
+          margin-bottom: 30px;
+          color: #fff; /* optional: makes text readable over image */
+        }
+
         .destination {
-          background: #d7ebf6;
+          background:rgb(173, 226, 255);
           color: #000;
           width: 100%;
           min-height: calc(100vh - 72px - 90px);
@@ -123,7 +147,7 @@ export default function Destination() {
         .headline {
           font-size: 3rem;
           font-weight: 700;
-          color: #6c6fcd;
+          color: white;
           margin-bottom: 20px;
           font-family: "Comic Sans MS";
         }
@@ -132,7 +156,7 @@ export default function Destination() {
           max-width: 720px;
           margin: 0 auto 30px;
           font-size: 1.15rem;
-          color: #555;
+          color: white;
           line-height: 1.6;
         }
 
@@ -183,7 +207,7 @@ export default function Destination() {
           font-weight: 600;
           border: none;
           border-radius: 8px;
-          background: linear-gradient(135deg, #6c6fcd, #9e9cf0);
+          background: black;
           color: white;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
@@ -191,7 +215,7 @@ export default function Destination() {
         }
 
         .fetch-btn:hover {
-          background: linear-gradient(135deg, #5a5ecb, #8c89e0);
+          background: black;
           transform: translateY(-2px);
         }
 
@@ -205,7 +229,18 @@ export default function Destination() {
         .fade-in {
           animation: fadeIn 0.4s ease-in-out forwards;
         }
-
+        .result-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+          margin-top: 2rem;
+        }
+        .result-box {
+          padding: 1rem;
+          background: #f3f3f3;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
         @keyframes fadeIn {
           from {
             opacity: 0;
