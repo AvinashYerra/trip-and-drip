@@ -51,11 +51,7 @@ export default function Fashion() {
           <p className="subtext">
             Discover fashion styles tailored to your cultural tastes.
           </p>
-        </section>
-
-        <section className="intro" data-aos="fade-up">
           <h2 className="subtext">Select any two preferences</h2>
-
           <div className="entity-grid">
             {QLOO_ENTITIES.map((ent) => {
               const isSelected =
@@ -80,7 +76,7 @@ export default function Fashion() {
             {selectedEntity1 && (
               <input
                 type="text"
-                placeholder={`Enter ${selectedEntity1}...`}
+                placeholder={`Enter any ${selectedEntity1} you like`}
                 value={input1}
                 onChange={(e) => setInput1(e.target.value)}
                 className="fade-in"
@@ -89,16 +85,17 @@ export default function Fashion() {
             {selectedEntity2 && (
               <input
                 type="text"
-                placeholder={`Enter ${selectedEntity2}...`}
+                placeholder={`Enter any ${selectedEntity2} you like`}
                 value={input2}
                 onChange={(e) => setInput2(e.target.value)}
                 className="fade-in"
               />
             )}
           </div>
-        </section>
 
-        <div className="action-section">
+
+
+                  <div className="action-section">
           <button
             onClick={fetchFashion}
             disabled={loading || !input1 || !input2}
@@ -120,9 +117,37 @@ export default function Fashion() {
         )}
 
         </div>
+        </section>
+
+
       </main>
 
       <style jsx>{`
+
+        .intro {
+        background-image: url('/images/fashion_back.jpg'); /* Change to your image path */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 60px 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        position: relative;
+      }
+      .intro::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border-radius: 12px;
+        z-index: 0;
+      }
+      .intro > * {
+        position: relative;
+        z-index: 1;
+      }
+
+
         .fashion {
           background: #fff6f0;
           color: #000;
@@ -135,7 +160,7 @@ export default function Fashion() {
         .headline {
           font-size: 3rem;
           font-weight: 700;
-          color: #e6739f;
+          color: white;
           margin-bottom: 20px;
           font-family: "Comic Sans MS";
         }
@@ -144,7 +169,7 @@ export default function Fashion() {
           max-width: 720px;
           margin: 0 auto 30px;
           font-size: 1.15rem;
-          color: #555;
+          color: white;
           line-height: 1.6;
         }
 
@@ -158,10 +183,10 @@ export default function Fashion() {
 
         .entity-button {
           padding: 10px 16px;
-          border: 2px solid #e6739f;
+          border: 2px solid black;
           border-radius: 20px;
           background: white;
-          color: #e6739f;
+          color: black;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s ease-in-out;
@@ -172,7 +197,7 @@ export default function Fashion() {
         }
 
         .entity-button.selected {
-          background: #e6739f;
+          background: white;
           color: white;
         }
 
@@ -212,15 +237,15 @@ export default function Fashion() {
           font-weight: 600;
           border: none;
           border-radius: 8px;
-          background: linear-gradient(135deg, #e6739f, #ff9ecf);
-          color: white;
+          background: white;
+          color: black;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .fetch-btn:hover {
-          background: linear-gradient(135deg, #d45d8d, #fa8fc2);
+          background: white;
           transform: translateY(-2px);
         }
 
