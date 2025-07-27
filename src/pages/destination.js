@@ -37,8 +37,8 @@ export default function Destination() {
           <p className="subtext">
             Get personalized travel destinations based on your Taste.
           </p>
-        {/* </section>
-        <section className="intro" data-aos="fade-up"> */}
+        </section>
+        <section className="intro" data-aos="fade-up">
           <div className="selectors">
             {/* Entity 1 */}
             <div className="dropdown-group">
@@ -103,47 +103,47 @@ export default function Destination() {
         </section>
 
         {result?.destinations && (
-        <div className="result-grid">
-          {result.destinations.map((dest, idx) => (
-            <div className="result-box" key={idx}>
-              <h3>🌍 Suggested: {dest.name}</h3>
-              {dest.info ? (
-                <>
-                  <p>Country: {dest.info.country || "Unknown"}</p>
-                  <p>Tags: {dest.info.tags?.join(", ") || "No tags available"}</p>
-                  {dest.info.description && <p>{dest.info.description}</p>}
-                </>
-              ) : (
-                <p>❌ Info not available</p>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+          <div className="result-grid">
+            {result.destinations.map((dest, idx) => (
+              <div className="result-box" key={idx}>
+                <h3>🌍 Suggested: {dest.name}</h3>
+                {dest.info ? (
+                  <>
+                    <p>Country: {dest.info.country || "Unknown"}</p>
+                    <p>
+                      Tags: {dest.info.tags?.join(", ") || "No tags available"}
+                    </p>
+                    {dest.info.description && <p>{dest.info.description}</p>}
+                  </>
+                ) : (
+                  <p>❌ Info not available</p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </main>
 
       <style jsx>{`
-
-      .intro {
-          background-image: url('/images/destination.jpg'); /* replace with your image path */
+        .destination {
+          background: rgb(173, 226, 255);
+          color: #000;
+          width: 100%;
+          min-height: calc(100vh);
+          padding: 80px 20px;
+          text-align: center;
+          background-image: url("/images/destination.jpg");
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
-          padding: 60px 20px;
+          padding: 120px 20px 0;
+        }
+
+        .intro {
+          padding: 20px;
           border-radius: 12px;
-          margin-bottom: 30px;
-          color: #fff; /* optional: makes text readable over image */
+          color: #fff;
         }
-
-        .destination {
-          background:rgb(173, 226, 255);
-          color: #000;
-          width: 100%;
-          min-height: calc(100vh - 72px - 90px);
-          padding: 80px 20px;
-          text-align: center;
-        }
-
         .headline {
           font-size: 3rem;
           font-weight: 700;
@@ -174,7 +174,7 @@ export default function Destination() {
           background: rgba(255, 255, 255, 0.05);
           padding: 20px;
           border-radius: 16px;
-          min-width: 280px;
+          min-width: 320px;
         }
 
         label {
@@ -201,21 +201,21 @@ export default function Destination() {
         }
 
         .fetch-btn {
-          margin-top: 30px;
+          margin-top: 50px;
           padding: 12px 24px;
           font-size: 1rem;
           font-weight: 600;
           border: none;
           border-radius: 8px;
-          background: black;
+          background: rgb(36, 33, 33);
           color: white;
           cursor: pointer;
           transition: all 0.3s ease-in-out;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
         }
 
         .fetch-btn:hover {
-          background: black;
+          background: rgb(0, 0, 0);
           transform: translateY(-2px);
         }
 
@@ -239,7 +239,7 @@ export default function Destination() {
           padding: 1rem;
           background: #f3f3f3;
           border-radius: 8px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
         @keyframes fadeIn {
           from {

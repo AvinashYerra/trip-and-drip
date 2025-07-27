@@ -52,8 +52,9 @@ export default function Fashion() {
             Discover fashion styles tailored to your cultural tastes.
           </p>
           <h2 className="subtext">Select any two preferences</h2>
+
           <div className="entity-grid">
-            {QLOO_ENTITIES.map((ent) => {
+            {QLOO_ENTITIES.map((ent, index) => {
               const isSelected =
                 selectedEntity1 === ent.value || selectedEntity2 === ent.value;
               const disabled =
@@ -65,6 +66,8 @@ export default function Fashion() {
                   className={`entity-button ${isSelected ? "selected" : ""}`}
                   onClick={() => handleEntityClick(ent.value)}
                   disabled={disabled}
+                  data-aos="zoom-in"
+                  data-aos-delay={`${index * 60}`}
                 >
                   {ent.label}
                 </button>
@@ -76,7 +79,7 @@ export default function Fashion() {
             {selectedEntity1 && (
               <input
                 type="text"
-                placeholder={`Enter any ${selectedEntity1} you like`}
+                placeholder={`Enter a ${selectedEntity1} you like`}
                 value={input1}
                 onChange={(e) => setInput1(e.target.value)}
                 className="fade-in"
@@ -85,7 +88,7 @@ export default function Fashion() {
             {selectedEntity2 && (
               <input
                 type="text"
-                placeholder={`Enter any ${selectedEntity2} you like`}
+                placeholder={`Enter a ${selectedEntity2} you like`}
                 value={input2}
                 onChange={(e) => setInput2(e.target.value)}
                 className="fade-in"
@@ -93,83 +96,64 @@ export default function Fashion() {
             )}
           </div>
 
+          <div className="action-section">
+            <button
+              onClick={fetchFashion}
+              disabled={loading || !input1 || !input2}
+              className="fetch-btn"
+            >
+              {loading ? "Styling..." : "Find Fashion Style"}
+            </button>
 
-
-                  <div className="action-section">
-          <button
-            onClick={fetchFashion}
-            disabled={loading || !input1 || !input2}
-            className="fetch-btn"
-          >
-            {loading ? "Styling..." : "Find Fashion Style"}
-          </button>
-
-          {result?.styles && result.styles.length > 0 && (
-          <div className="result-grid">
-            {result.styles.map((style, index) => (
-              <div className="result-box" key={index}>
-                <h3>👗 Suggested Style: {style.fashionStyle}</h3>
-                <p><strong>Inspiration:</strong> {style.inspiration}</p>
-                <p><strong>Brand:</strong> {style.brand}</p>
+            {result?.styles && result.styles.length > 0 && (
+              <div className="result-grid">
+                {result.styles.map((style, index) => (
+                  <div className="result-box" key={index}>
+                    <h3>👗 {style.fashionStyle}</h3>
+                    <p>
+                      <strong>Inspiration:</strong> {style.inspiration}
+                    </p>
+                    <p>
+                      <strong>Brand:</strong> {style.brand}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
-
-        </div>
         </section>
-
-
       </main>
 
       <style jsx>{`
+        .fashion {
+          min-height: 100vh;
+          padding: 80px 16px 40px;
+          background: url("/images/fashion_back.jpg") no-repeat center/cover;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
         .intro {
-        background-image: url('/images/fashion_back.jpg'); /* Change to your image path */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: 60px 20px;
-        border-radius: 12px;
-        margin-bottom: 30px;
-        position: relative;
-      }
-      .intro::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        border-radius: 12px;
-        z-index: 0;
-      }
-      .intro > * {
-        position: relative;
-        z-index: 1;
-      }
-
-
-        .fashion {
-          background: #fff6f0;
-          color: #000;
+          max-width: 960px;
           width: 100%;
-          min-height: calc(100vh - 72px - 90px);
-          padding: 80px 20px;
+          background: rgba(0, 0, 0, 0.4);
+          border-radius: 16px;
+          padding: 40px 24px;
           text-align: center;
+          color: white;
         }
 
         .headline {
-          font-size: 3rem;
-          font-weight: 700;
-          color: white;
-          margin-bottom: 20px;
+          font-size: 2.5rem;
           font-family: "Comic Sans MS";
+          margin-bottom: 12px;
         }
 
         .subtext {
-          max-width: 720px;
-          margin: 0 auto 30px;
-          font-size: 1.15rem;
-          color: white;
+          font-size: 1.1rem;
+          max-width: 640px;
+          margin: 0 auto 24px;
           line-height: 1.6;
         }
 
@@ -182,97 +166,138 @@ export default function Fashion() {
         }
 
         .entity-button {
-          padding: 10px 16px;
-          border: 2px solid black;
-          border-radius: 20px;
+          position: relative;
+          overflow: hidden;
+          padding: 0.6rem 1.2rem;
+          font-size: 1rem;
+          border: 2px solid #ccc;
+          border-radius: 25px;
           background: white;
-          color: black;
-          font-weight: 600;
+          color: #333;
           cursor: pointer;
-          transition: all 0.2s ease-in-out;
-        }
-
-        .entity-button:hover {
-          background: #ffe6f0;
+          animation: fadeInScale 0.4s ease forwards;
+          transition: transform 0.25s ease, background-color 0.25s ease,
+            color 0.25s ease, border-color 0.25s ease;
         }
 
         .entity-button.selected {
-          background: white;
+          background-color:rgb(245, 144, 185);
           color: white;
+          transform: scale(1.05);
+          border-color:rgb(239, 101, 156);
         }
 
-        .entity-button:disabled:not(.selected) {
-          opacity: 0.4;
+        .entity-button:disabled {
+          opacity: 0.5;
           cursor: not-allowed;
+          transform: none;
         }
 
+        /* Ripple effect */
+        .entity-button::after {
+          content: "";
+          position: absolute;
+          background: #ffe6f0;
+          border-radius: 50%;
+          transform: scale(0);
+          width: 100px;
+          height: 100px;
+          top: 50%;
+          left: 50%;
+          pointer-events: none;
+          transition: transform 0.6s ease, opacity 1s ease;
+          transform-origin: center;
+          opacity: 0;
+        }
+
+        .entity-button:active::after {
+          transform: scale(3);
+          opacity: 1;
+          transition: 0s;
+          top: 50%;
+          left: 50%;
+          transform-origin: center;
+        }
+
+        /* On mount animation */
+        @keyframes fadeInScale {
+          0% {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
         .input-fields {
+          margin: 30px auto;
+          max-width: 480px;
           display: flex;
           flex-direction: column;
-          gap: 20px;
-          max-width: 400px;
-          margin: 0 auto;
+          gap: 16px;
         }
 
         input {
           width: 100%;
-          padding: 10px;
-          border-radius: 8px;
+          padding: 12px 14px;
+          border-radius: 25px;
           border: none;
           font-size: 1rem;
+          outline: none;
         }
 
         .action-section {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-top: 40px;
-          gap: 30px;
+          margin-top: 30px;
         }
 
         .fetch-btn {
-          margin-top: 10px;
-          padding: 12px 24px;
+          background: #fff;
+          color: #000;
+          padding: 12px 28px;
+          font-weight: bold;
           font-size: 1rem;
-          font-weight: 600;
+          border-radius: 25px;
           border: none;
-          border-radius: 8px;
-          background: white;
-          color: black;
           cursor: pointer;
-          transition: all 0.3s ease-in-out;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          transition: 0.3s ease;
+          box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
         }
 
-        .fetch-btn:hover {
-          background: white;
+        .fetch-btn:hover:not(:disabled) {
+          background: rgb(245, 144, 185);
+          color: #fff;
           transform: translateY(-2px);
         }
 
         .fetch-btn:disabled {
-          background: #ccc;
+          opacity: 0.6;
           cursor: not-allowed;
-          transform: none;
-          box-shadow: none;
+        }
+
+        .result-grid {
+          margin-top: 40px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 20px;
+          width: 100%;
+        }
+
+        .result-box {
+          background: #fff;
+          color: #333;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          text-align: left;
         }
 
         .fade-in {
           animation: fadeIn 0.4s ease-in-out forwards;
         }
-        .result-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-        margin-top: 2rem;
-      }
-      .result-box {
-        padding: 1rem;
-        background: #f9f9f9;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      }
-
 
         @keyframes fadeIn {
           from {
@@ -285,26 +310,15 @@ export default function Fashion() {
           }
         }
 
-        .result-box {
-          margin-top: 40px;
-          background: #ffe6f0;
-          padding: 24px;
-          border-radius: 16px;
-          display: inline-block;
-          text-align: left;
-        }
-
-        @media (max-width: 768px) {
-          .entity-grid {
-            gap: 10px;
+        @media (max-width: 640px) {
+          .headline {
+            font-size: 2rem;
           }
-
-          h1 {
-            font-size: 2.2rem;
+          .subtext {
+            font-size: 1rem;
           }
-
-          p {
-            font-size: 1.05rem;
+          .entity-button {
+            font-size: 0.95rem;
           }
         }
       `}</style>
