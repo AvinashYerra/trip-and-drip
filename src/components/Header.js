@@ -21,7 +21,10 @@ const Header = () => {
         <div className="nav-link" onClick={() => handleNavigation("/")}>
           Home
         </div>
-        <div className="nav-link" onClick={() => handleNavigation("/destination")}>
+        <div
+          className="nav-link"
+          onClick={() => handleNavigation("/destination")}
+        >
           Destination
         </div>
         <div className="nav-link" onClick={() => handleNavigation("/fashion")}>
@@ -29,7 +32,10 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+      <div
+        className={`hamburger ${menuOpen ? "open" : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         <div className="line top"></div>
         <div className="line middle"></div>
         <div className="line bottom"></div>
@@ -38,15 +44,19 @@ const Header = () => {
       <style jsx>{`
         .navbar {
           width: 100%;
-          max-width: 1500px;
-          margin: 0 auto;
           padding: 1.5rem 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          position: relative;
-          z-index: 10;
-          background : transparent;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1000;
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          color: #fff;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -71,7 +81,7 @@ const Header = () => {
         }
 
         .nav-link:hover {
-          color: #f0b4b4;
+          color: rgb(40, 108, 197);
         }
 
         .hamburger {
@@ -91,7 +101,7 @@ const Header = () => {
         }
 
         .hamburger.open .top {
-          transform: rotate(45deg) translateY(10px);
+          transform: rotate(45deg) translateY(18px);
         }
 
         .hamburger.open .middle {
@@ -99,7 +109,7 @@ const Header = () => {
         }
 
         .hamburger.open .bottom {
-          transform: rotate(-45deg) translateY(-10px);
+          transform: rotate(-45deg) translateY(-18px);
         }
 
         @media (max-width: 768px) {
@@ -112,16 +122,16 @@ const Header = () => {
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.3);
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
-            padding: 1.5rem;
+            padding: 1.5rem 1rem;
             transform: translateY(-100%);
             transition: all 0.3s ease;
             opacity: 0;
             pointer-events: none;
-            border-radius: 12px;
+            backdrop-filter: blur(6px);
           }
 
           .nav-items.open {
@@ -131,7 +141,7 @@ const Header = () => {
           }
 
           .nav-link {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: white;
           }
         }

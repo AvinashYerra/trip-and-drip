@@ -14,7 +14,7 @@ const Footer = () => (
         padding: 30px 0;
         font-size: 0.9rem;
         color: #666;
-        min-height: 90px;
+        min-height: 108px;
       }
     `}</style>
   </footer>
