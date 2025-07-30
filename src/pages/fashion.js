@@ -128,7 +128,7 @@ export default function Fashion() {
         .fashion {
           min-height: 100vh;
           padding: 80px 16px 40px;
-          background: url("/images/fashion_back.jpg") no-repeat center/cover;
+          background: url("/images/fashion8.jpeg") no-repeat center/cover;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -137,7 +137,7 @@ export default function Fashion() {
         .intro {
           max-width: 960px;
           width: 100%;
-          background: rgba(0, 0, 0, 0.4);
+          // background: rgba(0, 0, 0, 0.4);
           border-radius: 16px;
           padding: 40px 24px;
           text-align: center;
