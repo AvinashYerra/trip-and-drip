@@ -1,3 +1,4 @@
+import FashionCards from "@/components/fashion/FashionCards";
 import { QLOO_ENTITIES } from "@/data/qloo";
 import { useState } from "react";
 
@@ -8,6 +9,7 @@ export default function Fashion() {
   const [input2, setInput2] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const entities = QLOO_ENTITIES.filter((ent) => ent.value !== "brand");
 
   async function fetchFashion() {
     setLoading(true);
@@ -54,7 +56,7 @@ export default function Fashion() {
           <h2 className="subtext">Select any two preferences</h2>
 
           <div className="entity-grid">
-            {QLOO_ENTITIES.map((ent, index) => {
+            {entities.map((ent, index) => {
               const isSelected =
                 selectedEntity1 === ent.value || selectedEntity2 === ent.value;
               const disabled =
@@ -104,40 +106,41 @@ export default function Fashion() {
             >
               {loading ? "Styling..." : "Find Fashion Style"}
             </button>
-
-            {result?.styles && result.styles.length > 0 && (
-              <div className="result-grid">
-                {result.styles.map((style, index) => (
-                  <div className="result-box" key={index}>
-                    <h3>👗 {style.fashionStyle}</h3>
-                    <p>
-                      <strong>Inspiration:</strong> {style.inspiration}
-                    </p>
-                    <p>
-                      <strong>Brand:</strong> {style.brand}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </section>
       </main>
+      {result?.styles && result.styles.length > 0 && (
+        <FashionCards styles={result.styles} />
+      )}
 
       <style jsx>{`
         .fashion {
-          min-height: 100vh;
-          padding: 80px 16px 40px;
-          background: url("/images/fashion8.jpeg") no-repeat center/cover;
+          background: rgb(173, 226, 255);
+          color: #000;
+          width: 100%;
+          min-height: calc(100vh);
+          text-align: center;
+          background-image: url("/images/fashion_background.png");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          padding: 120px 20px 0;
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
+        }
+
+        .fashion section {
+          margin: 0 auto;
+          max-width: 960px;
+          width: 100%;
         }
 
         .intro {
           max-width: 960px;
           width: 100%;
-          // background: rgba(0, 0, 0, 0.4);
+          background: rgba(0, 0, 0, 0.3);
           border-radius: 16px;
           padding: 40px 24px;
           text-align: center;
@@ -181,10 +184,10 @@ export default function Fashion() {
         }
 
         .entity-button.selected {
-          background-color:rgb(245, 144, 185);
+          background-color: #ce580a;
           color: white;
           transform: scale(1.05);
-          border-color:rgb(239, 101, 156);
+          border-color: #ce580a;
         }
 
         .entity-button:disabled {
@@ -197,7 +200,7 @@ export default function Fashion() {
         .entity-button::after {
           content: "";
           position: absolute;
-          background: #ffe6f0;
+          background: #c98657;
           border-radius: 50%;
           transform: scale(0);
           width: 100px;

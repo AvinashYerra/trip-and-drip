@@ -1,4 +1,4 @@
-import DestinationResults from "@/components/Destination/DestinationResults";
+import DestinationResults from "@/components/destination/DestinationResults";
 import { QLOO_ENTITIES } from "@/data/qloo";
 import { useState } from "react";
 
@@ -11,7 +11,6 @@ export default function Destination() {
   const [result, setResult] = useState(null);
 
   const entities = QLOO_ENTITIES.filter((ent) => ent.value !== "destination");
-  console.log(result);
   
   async function fetchDestination() {
     setLoading(true);
@@ -115,7 +114,6 @@ export default function Destination() {
           color: #000;
           width: 100%;
           min-height: calc(100vh);
-          padding: 80px 20px;
           text-align: center;
           background-image: url("/images/destination.jpg");
           background-size: cover;
