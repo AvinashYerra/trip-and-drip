@@ -1,3 +1,4 @@
+import DestinationResults from "@/components/Destination/DestinationResults";
 import { QLOO_ENTITIES } from "@/data/qloo";
 import { useState } from "react";
 
@@ -9,6 +10,9 @@ export default function Destination() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
+  const entities = QLOO_ENTITIES.filter((ent) => ent.value !== "destination");
+  console.log(result);
+  
   async function fetchDestination() {
     setLoading(true);
     setResult(null);
@@ -40,7 +44,6 @@ export default function Destination() {
         </section>
         <section className="intro" data-aos="fade-up">
           <div className="selectors">
-            {/* Entity 1 */}
             <div className="dropdown-group">
               <label>Select First Category</label>
               <select
@@ -48,7 +51,7 @@ export default function Destination() {
                 onChange={(e) => setSelectedEntity1(e.target.value)}
               >
                 <option value="">Choose One</option>
-                {QLOO_ENTITIES.map((ent) => (
+                {entities.map((ent) => (
                   <option key={ent.value} value={ent.value}>
                     {ent.label}
                   </option>
@@ -66,7 +69,6 @@ export default function Destination() {
               )}
             </div>
 
-            {/* Entity 2 */}
             <div className="dropdown-group">
               <label>Select Second Category</label>
               <select
@@ -74,7 +76,7 @@ export default function Destination() {
                 onChange={(e) => setSelectedEntity2(e.target.value)}
               >
                 <option value="">Choose one</option>
-                {QLOO_ENTITIES.map((ent) => (
+                {entities.map((ent) => (
                   <option key={ent.value} value={ent.value}>
                     {ent.label}
                   </option>
@@ -103,24 +105,7 @@ export default function Destination() {
         </section>
 
         {result?.destinations && (
-          <div className="result-grid">
-            {result.destinations.map((dest, idx) => (
-              <div className="result-box" key={idx}>
-                <h3>🌍 Suggested: {dest.name}</h3>
-                {dest.info ? (
-                  <>
-                    <p>Country: {dest.info.country || "Unknown"}</p>
-                    <p>
-                      Tags: {dest.info.tags?.join(", ") || "No tags available"}
-                    </p>
-                    {dest.info.description && <p>{dest.info.description}</p>}
-                  </>
-                ) : (
-                  <p>❌ Info not available</p>
-                )}
-              </div>
-            ))}
-          </div>
+          <DestinationResults destinations={result.destinations} />
         )}
       </main>
 
@@ -229,18 +214,7 @@ export default function Destination() {
         .fade-in {
           animation: fadeIn 0.4s ease-in-out forwards;
         }
-        .result-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 1rem;
-          margin-top: 2rem;
-        }
-        .result-box {
-          padding: 1rem;
-          background: #f3f3f3;
-          border-radius: 8px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+        
         @keyframes fadeIn {
           from {
             opacity: 0;
