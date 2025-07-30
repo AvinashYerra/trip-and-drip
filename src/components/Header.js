@@ -1,6 +1,7 @@
 // src/components/Header.js
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +15,8 @@ const Header = () => {
   return (
     <div className="navbar">
       <div className="logo" onClick={() => handleNavigation("/")}>
-        TRIP & DRIP
+        <Image src="/icon.jpeg" alt="Logo" width={35} height={35} />
+        <span>TRIP & DRIP</span>
       </div>
 
       <div className={`nav-items ${menuOpen ? "open" : ""}`}>
@@ -65,6 +67,10 @@ const Header = () => {
           color: #fff;
           cursor: pointer;
           font-family: "Comic Sans MS";
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
         }
 
         .nav-items {
@@ -143,6 +149,11 @@ const Header = () => {
           .nav-link {
             font-size: 1.2rem;
             color: white;
+          }
+
+          .logo {
+            font-size: 1.5rem;
+            gap: 10px;
           }
         }
       `}</style>

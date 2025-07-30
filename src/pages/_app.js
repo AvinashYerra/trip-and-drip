@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../styles/globals.css";
+import Head from "next/head";
 
 export default function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -15,6 +16,10 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <title>Trip & Drip</title>
+      </Head>
+
       <Header />
       <Component {...pageProps} />
       <Footer />
