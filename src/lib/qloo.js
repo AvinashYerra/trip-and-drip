@@ -75,8 +75,8 @@ export async function getFashionStyleInfo(fashionStyleName) {
   }
   
   return {
-    name: entity.name,
-    properties: entity.properties,
-    tags: entity.tags?.map((tag) => tag.name) || [],
+    name: entity?.name,
+    properties: entity?.properties,
+    tags: entity?.tags?.map((tag) => tag.name) || [],
   };
 }
