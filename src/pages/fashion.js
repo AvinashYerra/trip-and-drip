@@ -1,8 +1,10 @@
 import FashionCards from "@/components/fashion/FashionCards";
 import { QLOO_ENTITIES } from "@/data/qloo";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Fashion() {
+  const resultRef = useRef(null);
+
   const [selectedEntity1, setSelectedEntity1] = useState("");
   const [selectedEntity2, setSelectedEntity2] = useState("");
   const [input1, setInput1] = useState("");
@@ -29,6 +31,10 @@ export default function Fashion() {
     const data = await res.json();
     setResult(data);
     setLoading(false);
+
+    setTimeout(() => {
+      resultRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   }
 
   const handleEntityClick = (value) => {
@@ -110,7 +116,9 @@ export default function Fashion() {
         </section>
       </main>
       {result?.styles && result.styles.length > 0 && (
-        <FashionCards styles={result.styles} />
+        <div ref={resultRef}>
+          <FashionCards styles={result.styles} />
+        </div>
       )}
 
       <style jsx>{`
