@@ -79,7 +79,7 @@ const Header = () => {
         }
 
         .nav-link {
-          font-size: 1rem;
+          font-size: 1.2rem;
           font-weight: 500;
           color: #fff;
           cursor: pointer;
@@ -87,7 +87,7 @@ const Header = () => {
         }
 
         .nav-link:hover {
-          color: rgb(40, 108, 197);
+          transform: translateY(-2px) scale(1.1);
         }
 
         .hamburger {

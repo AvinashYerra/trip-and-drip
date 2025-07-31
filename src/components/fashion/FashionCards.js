@@ -14,7 +14,7 @@ const FashionCards = ({ styles }) => {
             <div key={index} className="glass-card">
               <div className="image-wrapper">
                 <Image
-                  src={image?.url}
+                  src={image?.url || "/images/fashion_fallback.jpg"}
                   alt={`${brand} logo`}
                   className="brand-image"
                   width={200}
@@ -121,6 +121,7 @@ const FashionCards = ({ styles }) => {
         }
 
         .glass-card {
+          max-width: 400px;
           backdrop-filter: blur(10px);
           background: rgba(255, 255, 255, 0.15);
           border-radius: 24px;

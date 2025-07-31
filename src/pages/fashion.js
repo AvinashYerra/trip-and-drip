@@ -81,7 +81,7 @@ export default function Fashion() {
             {selectedEntity1 && (
               <input
                 type="text"
-                placeholder={`Enter a ${selectedEntity1} you like`}
+                placeholder={`Enter any ${selectedEntity1} you like`}
                 value={input1}
                 onChange={(e) => setInput1(e.target.value)}
                 className="fade-in"
@@ -90,7 +90,7 @@ export default function Fashion() {
             {selectedEntity2 && (
               <input
                 type="text"
-                placeholder={`Enter a ${selectedEntity2} you like`}
+                placeholder={`Enter any ${selectedEntity2} you like`}
                 value={input2}
                 onChange={(e) => setInput2(e.target.value)}
                 className="fade-in"
@@ -271,7 +271,7 @@ export default function Fashion() {
         }
 
         .fetch-btn:hover:not(:disabled) {
-          background: rgb(245, 144, 185);
+          background: #ce580a;
           color: #fff;
           transform: translateY(-2px);
         }
