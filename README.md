@@ -7,6 +7,11 @@ Trip and Drip is a creative and imaginative web app that takes any two user-prov
 
 From aesthetic getaways to curated style ideas, Trip and Drip transforms your cultural inputs into thoughtful recommendations.
 
+## Live Demo
+
+You can try the app here:  
+https://trip-and-drip.vercel.app/
+
 ## Features
 
 - Custom Input Suggestions  
@@ -21,27 +26,41 @@ From aesthetic getaways to curated style ideas, Trip and Drip transforms your cu
 - AI-Powered Results  
   Uses Google's Gemini API to generate creative and relevant suggestions.
 
+- Taste AI™ Integration
+  Powered by Qloo API to intelligently match user inputs with culture-aware entities.
+
 - Fully Frontend  
   Built entirely with Next.js and deployed on Vercel. No backend required.
+
+## How It Works
+
+1. **User Input**  
+   Enter any two concepts (e.g., "Coldplay" + "Sunset").
+
+2. **Semantic Matching (Qloo API)**  
+   Qloo’s Taste AI™ API returns related cultural entities for both inputs.
+
+3. **Theme Generation (Gemini API)**  
+   These entities are passed to Gemini to generate a creative Trip or Drip suggestion.
+
+4. **Refined Results (Qloo API)**  
+   The generated suggestion is searched again via Qloo to surface culturally relevant, real-world results.
+
+5. **Display**  
+   Final curated suggestions are shown instantly in a responsive UI.
+
 
 ## Tech Stack
 
 | Layer         | Technology                 |
 |---------------|----------------------------|
 | Framework     | Next.js                    |
-| Styling       | CSS                        |
+| Styling       | CSS (<style jsx>)          |
 | AI API        | Gemini API (by Google)     |
+| Taste Mapping | Qloo Taste AI™ API         |
 | Deployment    | Vercel                     |
 
-## How It Works
 
-1. The user enters any two free-form inputs such as a mood, artist, activity, or concept.
-2. Based on the selected tab (Trip or Drip), the app sends the input pair to the Gemini API.
-3. Gemini returns a relevant travel destination or fashion suggestion.
-4. The result is displayed instantly through a clean and responsive interface.
 
-## Live Demo
 
-You can try the app here:  
-https://trip-and-drip.vercel.app/
 
